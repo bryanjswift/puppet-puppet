@@ -1,0 +1,28 @@
+[main]
+  logdir = /var/log/puppet
+  vardir = /var/lib/puppet
+  ssldir = /var/lib/puppet/ssl
+  rundir = /var/run/puppet
+  factpath = $vardir/lib/facter
+  confdir = /etc/puppet
+  # Set the default environment to production
+  environment = production
+
+[agent]
+  pluginsync = false
+  report = true
+  server = <%= puppetserver %>
+  environment = <%= puppetenv %>
+
+[master]
+  # These are needed when the puppetmaster is run by passenger
+  # and can safely be removed if webrick is used.
+  ssl_client_header = SSL_CLIENT_S_DN 
+  ssl_client_verify_header = SSL_CLIENT_VERIFY
+  certname = <%= puppetserver %>
+  # Set the default environment to production
+  environment = production
+  manifest = $confdir/environments/$environment/manifests/site.pp
+  manifestdir = $confdir/environments/$environment/manifests
+  modulepath = $confdir/environments/$environment/modules:$confdir/environments/$environment/private_modules:$confdir/environments/$environment/modundev
+  templatedir = $confdir/environments/$environment/templates
