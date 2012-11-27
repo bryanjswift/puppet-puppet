@@ -2,7 +2,9 @@
 #
 # Manage configuration for puppet service
 #
-# [ps]: https://github.com/pdxcat/puppet-sync
+# === Examples
+#
+#  include puppet::config
 #
 # === Authors
 #
