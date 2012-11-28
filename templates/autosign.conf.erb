@@ -1,0 +1,7 @@
+<% if nodes.is_a? Array -%>
+<% nodes.each do |node| -%>
+<%= node %>
+<% end -%>
+<% elsif nodes != '' -%>
+<%= nodes %>
+<% end -%>
