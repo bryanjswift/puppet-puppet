@@ -25,12 +25,8 @@
 # Copyright 2012 Bryan J Swift
 #
 class puppet::master(
-  $autosign_nodes = false
+  $autosign_nodes = false,
 ) {
-
-  include puppet
-  include puppet::params
-  $puppetserver = $puppet::params::puppetserver
 
   package { 'puppetmaster':
     ensure => installed,
