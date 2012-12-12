@@ -13,6 +13,7 @@
   report = true
   server = <%= puppetserver %>
   environment = <%= puppetenv %>
+  <% if (agent_certname != '') %>certname = <%= agent_certname %><% end %>
 
 [master]
   # These are needed when the puppetmaster is run by passenger

@@ -29,6 +29,7 @@
 # Copyright 2012 Bryan J Swift
 #
 class puppet(
+  $certname    = '',
   $environment = 'production',
   $server      = 'puppet',
   $start       = 'yes',

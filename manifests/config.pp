@@ -16,9 +16,10 @@
 #
 class puppet::config {
 
-  $puppetserver = $puppet::server
-  $puppetenv    = $puppet::environment
-  $puppetstart  = $puppet::start
+  $agent_certname = $puppet::certname
+  $puppetserver   = $puppet::server
+  $puppetenv      = $puppet::environment
+  $puppetstart    = $puppet::start
 
   file { '/etc/puppet/puppet.conf':
     ensure  => present,
