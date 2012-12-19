@@ -8,6 +8,10 @@
 #   Set the environment for the puppet agent
 #   Default: production
 #
+# [*pluginsync*]
+#   Whether plugins should be synced with the central server.
+#   Default: false
+#
 # [*server*]
 #   The server to connect to as the puppetmaster
 #   Default: puppet
@@ -31,6 +35,7 @@
 class puppet(
   $certname    = '',
   $environment = 'production',
+  $pluginsync  = 'false',
   $server      = 'puppet',
   $start       = 'yes',
 ) {
@@ -44,6 +49,7 @@ class puppet(
   }
 
   validate_re($start, '^(yes|no)$', 'The $start value must be yes or no.')
+  validate_re($pluginsync, '^(true|false)$', 'The $pluginsync value must be true or false.')
 
   include puppet::install
   include puppet::config

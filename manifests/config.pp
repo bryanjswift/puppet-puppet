@@ -17,9 +17,10 @@
 class puppet::config {
 
   $agent_certname = $puppet::certname
-  $puppetserver   = $puppet::server
+  $pluginsync     = $puppet::pluginsync
   $puppetenv      = $puppet::environment
   $puppetstart    = $puppet::start
+  $puppetserver   = $puppet::server
 
   file { '/etc/puppet/puppet.conf':
     ensure  => present,
