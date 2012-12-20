@@ -19,7 +19,10 @@ class puppet::config {
   $agent_certname = $puppet::certname
   $pluginsync     = $puppet::pluginsync
   $puppetenv      = $puppet::environment
-  $puppetstart    = $puppet::start
+  $puppetstart    = $puppet::start ? {
+    'yes'   => 'yes',
+    default => 'no',
+  }
   $puppetserver   = $puppet::server
 
   file { '/etc/puppet/puppet.conf':
@@ -39,6 +42,19 @@ class puppet::config {
     mode    => '0644',
     require => [Class['puppet::install']],
     notify  => [Class['puppet::service']],
+  }
+
+  $cron_ensure = $puppet::start ? {
+    'cron'  => 'file',
+    default => 'absent',
+  }
+
+  file { '/etc/cron.d/puppet.cron':
+    ensure  => $cron_ensure,
+    content => template('puppet/puppet.cron.erb'),
+    owner   => 'root',
+    group   => 'root',
+    require => [Class['puppet::install']],
   }
 
 }

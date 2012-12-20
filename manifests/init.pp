@@ -48,7 +48,7 @@ class puppet(
     fail('server must be defined')
   }
 
-  validate_re($start, '^(yes|no)$', 'The $start value must be yes or no.')
+  validate_re($start, '^(yes|no|cron)$', 'The $start value must be yes or no or cron.')
   validate_re($pluginsync, '^(true|false)$', 'The $pluginsync value must be true or false.')
 
   include puppet::install
