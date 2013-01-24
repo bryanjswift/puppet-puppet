@@ -45,12 +45,20 @@ class puppet::config {
   }
 
   $cron_ensure = $puppet::start ? {
-    'cron'  => 'file',
+    'cron'  => 'present',
     default => 'absent',
   }
 
-  file { '/etc/cron.d/puppet.cron':
+  cron { 'puppet':
     ensure  => $cron_ensure,
+    command => '`which puppet` agent --onetime --no-daemonize --verboxe',
+    user    => 'root',
+    minute  => '*/10',
+    require => [Class['puppet::install']],
+  }
+
+  file { '/etc/cron.d/puppet.cron':
+    ensure  => absent,
     content => template('puppet/puppet.cron.erb'),
     owner   => 'root',
     group   => 'root',
