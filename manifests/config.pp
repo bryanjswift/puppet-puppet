@@ -51,9 +51,9 @@ class puppet::config {
 
   cron { 'puppet':
     ensure  => $cron_ensure,
-    command => '`which puppet` agent --onetime --no-daemonize --verboxe',
+    command => '/usr/bin/puppet agent --onetime --no-daemonize --verbose',
     user    => 'root',
-    minute  => '*/10',
+    minute  => '10',
     require => [Class['puppet::install']],
   }
 
